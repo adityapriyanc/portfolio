@@ -23,7 +23,9 @@ async function connectDB() {
   return cachedDb
 }
 
-connectDB()
+connectDB().catch(err => {
+  console.error('MongoDB connection failed, continuing without DB:', err.message)
+})
 
 const app = express()
 
