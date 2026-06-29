@@ -24,8 +24,9 @@ app.use(cors())
 app.use(express.json({ limit: '10mb' }))
 
 // --- Health ---
-app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+app.get('/api/health', async (_req, res) => {
+  const mongoState = ['disconnected', 'connected', 'connecting', 'disconnecting'][mongoose.connection.readyState] || 'unknown'
+  res.json({ status: 'ok', mongoState, timestamp: new Date().toISOString() })
 })
 
 // --- Auth ---
@@ -135,11 +136,12 @@ const seedData = {
 // --- Portfolio Routes ---
 app.get('/api/portfolio', async (_req, res) => {
   try {
+    await connectDB()
     let data = await Portfolio.findOne()
     if (!data) data = await Portfolio.create(seedData)
     res.json(data)
-  } catch {
-    res.status(500).json({ error: 'Failed to load data' })
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to load data', detail: err.message, name: err.name })
   }
 })
 
