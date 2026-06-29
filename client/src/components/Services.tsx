@@ -14,7 +14,7 @@ const steps = [
 ]
 
 export default function Services() {
-  const { services, personalInfo } = usePortfolio()
+  const { services } = usePortfolio()
   const [form, setForm] = useState({
     name: '', email: '', phone: '', serviceName: '', message: '', budget: '', timeline: '',
   })
