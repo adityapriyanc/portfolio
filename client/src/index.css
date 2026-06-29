@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@theme {
+  --color-carbon-vellum: #ffffff;
+  --color-obsidian: #0a0a13;
+  --color-pitch: #000000;
+  --color-void: #040407;
+  --color-graphite: #08080c;
+  --color-smoke: #b0b0c0;
+  --color-ash: #d0d0e0;
+  --color-charcoal: #2a2a32;
+  --color-iris-glow: #ff334b;
+  --color-twilight: #e21838;
+  --color-specter-lilac: #dedfee;
+
+  --font-framegothic: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-neuemachinainktrap: 'Space Mono', ui-monospace, 'Courier New', monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-obsidian);
+    color: var(--color-carbon-vellum);
+    font-family: var(--font-framegothic);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-iris-glow);
+    color: var(--color-obsidian);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-obsidian);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--color-iris-glow), #e21838);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-iris-glow);
+  }
+}
+
+@layer utilities {
+  .cosmic-bg {
+    background: linear-gradient(195deg, #0a0010, #02000a, #0c1d32);
+  }
+
+  .cosmic-bg-alt {
+    background:
+      radial-gradient(ellipse at 0% 0%, #0e0f20, #0c0c19, #000000);
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      linear-gradient(rgba(255, 51, 75, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 51, 75, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow circles */
+  .glow-circle {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 51, 75, 0.08) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-circle-1 {
+    top: 15%;
+    left: -10%;
+  }
+
+  .glow-circle-2 {
+    bottom: 20%;
+    right: -10%;
+  }
+
+  /* Hero glow circles */
+  .hero-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 51, 75, 0.08) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-glow-1 {
+    top: 15%;
+    left: -10%;
+  }
+
+  .hero-glow-2 {
+    bottom: 20%;
+    right: -10%;
+  }
+
+  /* Scroll reveal */
+  .reveal-visible {
+    opacity: 1 !important;
+    transform: translate(0, 0) !important;
+  }
+
+  /* Animations */
+  @keyframes floatImage {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  .animate-float {
+    animation: floatImage 4s ease-in-out infinite;
+  }
+
+  @keyframes rotateRing {
+    100% { transform: rotate(360deg); }
+  }
+
+  .animate-rotate-ring {
+    animation: rotateRing 20s linear infinite;
+  }
+
+  @keyframes cursorBlink {
+    50% { border-color: transparent; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-neuemachinainktrap);
+    font-size: 13px;
+    line-height: 0.9;
+    letter-spacing: 0.08em;
+    color: var(--color-iris-glow);
+    text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(255, 51, 75, 0.5);
+  }
+
+  .card-halo {
+    border: 1px solid var(--color-twilight);
+    border-radius: 10px;
+    background: var(--color-graphite);
+  }
+
+  .pill-button {
+    border-radius: 100px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .ghost-link {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-carbon-vellum);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .ghost-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-carbon-vellum);
+    transition: width 0.2s ease;
+  }
+
+  .ghost-link:hover::after {
+    width: 100%;
+  }
+}
+
+/* Light mode — swaps darks to lights, keeps red intact */
+.light {
+  --color-carbon-vellum: #1a1a2e;
+  --color-obsidian: #f0f0f5;
+  --color-graphite: #ffffff;
+  --color-void: #e8e8f0;
+  --color-smoke: #3a3a4a;
+  --color-ash: #4a4a5a;
+  --color-charcoal: #d0d0d8;
+}
+
+.light body {
+  background-color: var(--color-obsidian);
+  color: var(--color-carbon-vellum);
+}
+
+.light .cosmic-bg {
+  background: linear-gradient(195deg, #e8e8f0, #f5f5fa, #e0e0ea);
+}
+
+.light .cosmic-bg-alt {
+  background: radial-gradient(ellipse at 0% 0%, #e8e8f0, #f0f0f5, #fafafe);
+}
+
+.light .grid-overlay {
+  background-image:
+    linear-gradient(rgba(255, 51, 75, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 51, 75, 0.06) 1px, transparent 1px);
+}
+
+.light header {
+  background: rgba(240, 240, 245, 0.85) !important;
+  border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.light .glow-circle,
+.light .hero-glow {
+  background: radial-gradient(circle, rgba(255, 51, 75, 0.06) 0%, transparent 70%);
+}
+
+.light ::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
+
+@media (max-width: 640px) {
+  .glow-circle, .hero-glow {
+    width: 200px;
+    height: 200px;
+  }
+}
