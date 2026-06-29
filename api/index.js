@@ -8,11 +8,14 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfo
 const JWT_SECRET = process.env.JWT_SECRET || 'portfolio-admin-secret-change-me'
 
 let cachedDb = null
+let connectionError = null
 async function connectDB() {
   if (cachedDb) return cachedDb
   try {
     cachedDb = await mongoose.connect(MONGODB_URI)
+    connectionError = null
   } catch (err) {
+    connectionError = err.message
     console.error('MongoDB connection error:', err)
   }
   return cachedDb
@@ -26,7 +29,7 @@ app.use(express.json({ limit: '10mb' }))
 // --- Health ---
 app.get('/api/health', async (_req, res) => {
   const mongoState = ['disconnected', 'connected', 'connecting', 'disconnecting'][mongoose.connection.readyState] || 'unknown'
-  res.json({ status: 'ok', mongoState, timestamp: new Date().toISOString() })
+  res.json({ status: 'ok', mongoState, mongoError: connectionError, timestamp: new Date().toISOString() })
 })
 
 // --- Auth ---
