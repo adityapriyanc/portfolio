@@ -9,10 +9,12 @@ const JWT_SECRET = process.env.JWT_SECRET || 'portfolio-admin-secret-change-me'
 
 let cachedDb = null
 let connectionError = null
+let uriPreview = ''
 async function connectDB() {
   if (cachedDb) return cachedDb
   try {
-    cachedDb = await mongoose.connect(MONGODB_URI)
+    uriPreview = (MONGODB_URI || '').slice(0, 50)
+    cachedDb = await mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 10000 })
     connectionError = null
   } catch (err) {
     connectionError = err.message
@@ -29,7 +31,7 @@ app.use(express.json({ limit: '10mb' }))
 // --- Health ---
 app.get('/api/health', async (_req, res) => {
   const mongoState = ['disconnected', 'connected', 'connecting', 'disconnecting'][mongoose.connection.readyState] || 'unknown'
-  res.json({ status: 'ok', mongoState, mongoError: connectionError, timestamp: new Date().toISOString() })
+  res.json({ status: 'ok', mongoState, mongoError: connectionError, uriPreview, timestamp: new Date().toISOString() })
 })
 
 // --- Auth ---
