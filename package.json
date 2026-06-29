@@ -2,7 +2,7 @@
   "private": true,
   "workspaces": ["client", "server"],
   "scripts": {
-    "build": "cd client && npm run build",
-    "dev": "cd server && npm run dev"
+    "build": "npm -w client run build",
+    "dev": "npm -w server run dev"
   }
 }
