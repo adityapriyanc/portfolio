@@ -1,12 +1,12 @@
 import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import { connectDB } from './db'
-import contactRoutes from './routes/contact'
-import authRoutes from './routes/auth'
-import portfolioRoutes from './routes/portfolio'
-import servicesRoutes from './routes/services'
-import inquiriesRoutes from './routes/inquiries'
+import { connectDB } from './db.js'
+import contactRoutes from './routes/contact.js'
+import authRoutes from './routes/auth.js'
+import portfolioRoutes from './routes/portfolio.js'
+import servicesRoutes from './routes/services.js'
+import inquiriesRoutes from './routes/inquiries.js'
 
 const app = express()
 const PORT = process.env.PORT || 3001

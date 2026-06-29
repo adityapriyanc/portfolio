@@ -1,5 +1,5 @@
 import { Router, Response } from 'express'
-import Portfolio from '../models/Portfolio'
+import Portfolio from '../models/Portfolio.js'
 
 const router = Router()
 

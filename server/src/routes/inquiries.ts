@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express'
 import nodemailer from 'nodemailer'
-import Inquiry from '../models/Inquiry'
-import { authMiddleware, AuthRequest } from '../middleware/auth'
+import Inquiry from '../models/Inquiry.js'
+import { authMiddleware, AuthRequest } from '../middleware/auth.js'
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',

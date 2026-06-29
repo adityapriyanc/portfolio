@@ -1,11 +1,11 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import contactRoutes from '../server/src/routes/contact'
-import authRoutes from '../server/src/routes/auth'
-import portfolioRoutes from '../server/src/routes/portfolio'
-import servicesRoutes from '../server/src/routes/services'
-import inquiriesRoutes from '../server/src/routes/inquiries'
+import contactRoutes from '../server/src/routes/contact.js'
+import authRoutes from '../server/src/routes/auth.js'
+import portfolioRoutes from '../server/src/routes/portfolio.js'
+import servicesRoutes from '../server/src/routes/services.js'
+import inquiriesRoutes from '../server/src/routes/inquiries.js'
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio'
 
