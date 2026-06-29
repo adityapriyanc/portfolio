@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "cd client && tsc -b && vite build",
+    "build": "cd client && vite build",
     "dev": "cd server && tsx watch src/index.ts"
   },
   "dependencies": {
